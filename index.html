@@ -37,6 +37,7 @@
         </div>
     </div>
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         const loginButton = document.getElementById('loginButton');
         const servicesDiv = document.getElementById('services');
@@ -63,11 +64,10 @@
 
         const authenticateUser = async (username, password) => {
             try {
-                const response = await axios.post('/auth/authenticate', {
+                const response = await axios.post('/authenticate', {
                     username: username,
                     password: password
                 });
-
                 return response.data;
             } catch (error) {
                 console.error(error.message);
@@ -76,7 +76,7 @@
 
         const getUserService = async (userId) => {
             try {
-                const response = await axios.get(`/services/getservices/${userId}`);
+                const response = await axios.get(`/getservices/${userId}`);
                 return response.data;
             } catch (error) {
                 console.error(error.message);
@@ -89,15 +89,4 @@
                 service.services.forEach((item) => {
                     const listItem = document.createElement('li');
                     listItem.textContent = item.name;
-                    servicesList.appendChild(listItem);
-                });
-                servicesDiv.style.display = 'block';
-            }
-        };
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+                   
