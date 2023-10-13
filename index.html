@@ -1,42 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Portal de Cliente</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Portal de Clientes iCentral</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        body {
+            background: url("img/juarez_background.jpg");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .login-panel {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .login-logo {
+            margin: 20px 0;
+            max-width: 100%;
+            height: auto;
+        }
+        h1, h2 {
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Roboto', sans-serif;
+        }
+        .footer {
+            background-color: #4da7d7;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="card-title">Portal de Cliente</h1>
-                        <div class="form-group">
-                            <label for="username">Nombre de usuario:</label>
-                            <input type="text" class="form-control" id="username" placeholder="Ingresa tu nombre de usuario">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Contraseña:</label>
-                            <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña">
-                        </div>
-                        <button class="btn btn-primary" id="loginButton">Iniciar sesión</button>
-                    </div>
+            <div class="col-md-6 col-xs-12 login-panel">
+                <img src="img/iCentral_logo.png" alt="Logo" class="login-logo mx-auto d-block">
+                <h1 class="text-center">Portal de Cliente</h1>
+                <div class="form-group">
+                    <label for="username">Nombre de usuario:</label>
+                    <input type="text" class="form-control" id="username" placeholder="Ingresa tu nombre de usuario">
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" class="form-control" id="password" placeholder="Ingresa tu contraseña">
+                </div>
+                <button class="btn btn-primary btn-block" id="loginButton">Iniciar sesión</button>
+                <div class="form-group mt-3 text-right">
+                    <a href="passrecover.php" style="color: #007bff;">Crear cuenta / Recuperar contraseña</a>
                 </div>
             </div>
         </div>
-
         <div class="row mt-4">
-            <div class="col-md-6">
-                <div class="card" style="display: none;" id="services">
+            <div class="col-md-6 col-xs-12">
+                <div class="card login-panel" style="display: none;" id="services">
                     <div class="card-body">
-                        <h2 class="card-title">Servicios</h2>
+                        <h2 class="text-center">Servicios</h2>
                         <ul class="list-group" id="servicesList"></ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <div class="footer">
+        iCentral Sistemas y Comunicaciones, S.A. de C.V.
+    </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         const loginButton = document.getElementById('loginButton');
@@ -89,4 +125,15 @@
                 service.services.forEach((item) => {
                     const listItem = document.createElement('li');
                     listItem.textContent = item.name;
-                   
+            //CONTINUACION DEL CODIGO PARA CERRAR HTML
+                    listItem.className = 'list-group-item';
+                    servicesList.appendChild(listItem);
+                });
+                servicesDiv.style.display = 'block';
+            } else {
+                alert('No hay servicios disponibles.');
+            }
+        };
+    </script>
+</body>
+</html>
