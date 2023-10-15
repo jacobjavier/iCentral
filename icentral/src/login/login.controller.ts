@@ -9,7 +9,7 @@ export class LoginController {
         username: 'client',
         password: 'pa$$word',
         expiration: 604800,
-        sliding: 0,
+        sliding: 1,
         deviceName: 'My Phone Model',
       };
   
