@@ -1,11 +1,12 @@
-import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
+import { Injectable } from '@nestjs/common';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable()
-export class loginService {
-  constructor(private httpService: HttpService) {}
+export class LoginService {
+  constructor(private readonly loginService: HttpService) {}
 
-  async generateToken() {
+  public async apiFindAll() {
     const data = {
       username: 'noc@icentral.net',
       password: 'iCentral2020',
@@ -15,15 +16,19 @@ export class loginService {
     };
 
     try {
-      const response = await this.httpService.post('https://portal.icentral.com.mx/crm/api/v1.0/client-zone/login', data, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }).toPromise();
+      const response = await firstValueFrom(
+        this.loginService.post('https://portal.icentral.com.mx/crm/api/v1.0/client-zone/login', data, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }),
+      );
 
-      return response.data.token; // Asumiendo que el token se encuentra en la respuesta
+      return response.data;
     } catch (error) {
-      throw new Error('No se pudo generar el token.');
+      console.error('Error:', error);
+      throw error;
     }
   }
 }
+
